@@ -9,3 +9,41 @@
     // 'T' for tie
   // render function to play game
 
+/*----------- constants -----------*/
+
+
+
+
+
+
+
+
+/*-------- state variable ---------*/
+
+
+
+
+
+
+
+
+
+/*-------- cached elements --------*/
+
+
+
+
+
+
+
+/*-------- event listeners --------*/
+
+
+
+
+
+
+
+
+
+/*----------- functions -----------*/
