@@ -16,7 +16,6 @@ const COLORS = {
   '-1': 'yellow'
 }
 
-
 /*-------- state variable ---------*/
 let board; // array of 7 column arrays to initialize board
 let turn; // 1 or -1
@@ -25,10 +24,14 @@ let winner; // null = no winner; 1 or -1 winner; 'T' = Tie
 /*-------- cached elements --------*/
 const messageEl = document.querySelector('h1');
 const playAgainBtn = document.querySelector('button');
-const markerEls = document.querySelectorAll('#markers > div');
+// markerEls is a nodeList
+// change markerEls to an array to access index
+// const markerEls = document.querySelectorAll('#markers > div');
+// arrayliteral, instead of Array.from method use the brackets create a new array.  The spread syntax spread the out the interable
+const markerEls = [...document.querySelectorAll('#markers > div')];
 
 /*-------- event listeners --------*/
-
+document.getElementById('markers').addEventListener('click', handleDrop)
 
 
 /*----------- functions -----------*/
@@ -50,6 +53,32 @@ function init() {
   turn = 1;
   winner = null;
   render();
+}
+
+// In response to user interaction, update all impacted state, then call render()
+function handleDrop(event) {
+  const colIdx = markerEls.indexOf(event.target)
+  // console.log(event.target);
+  // Guards...
+  if (colIdx === -1) return;
+  // console.log(colIdx);
+  // Shortcut to the column array
+  const colArr = board[colIdx];
+  // Find the index of the first 0 in colArr
+  const rowIdx = colArr.indexOf(0);
+  // update the board state with the current player value (turn)
+  // board[colIdx][rowIdx] = turn;
+  colArr[rowIdx] = turn;
+  // console.log(colIdx, rowIdx);
+  turn *= -1;
+  // Check for winner
+  winner = getWinner();
+
+  render();
+}
+
+function getWinner() {
+  
 }
 
 // render() function visualizes all the state in the DOM
@@ -99,3 +128,4 @@ function renderControls() {
     markerEl.style.visibility = hideMarker ? 'hidden' : 'visible'
   })
 }
+
