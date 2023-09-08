@@ -1,5 +1,4 @@
 # CONNECT FOUR
-<header>CONNECT FOUR</header>
 
 1. ScreenShot
 
